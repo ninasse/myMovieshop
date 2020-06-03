@@ -1,0 +1,6 @@
+<h3>Movies in stock</h3>
+<div class="movie-list-container">
+  <div *ngFor="let movie of movies" class="movie-container">
+    <app-print-product [movie]="movie"></app-print-product>
+  </div>
+</div>

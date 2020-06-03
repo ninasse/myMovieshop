@@ -1,0 +1,15 @@
+<div>
+  <h3>{{ movie.Title }}</h3>
+  <p>{{ movie.Id }}</p>
+  <img src="{{ movie.ImgUrl }}" alt="{{ movie.Title }}" class="movie-img" />
+  <p>{{ movie.Descr }}</p>
+  <p>{{ movie.ReleaseYear }}</p>
+  <h5>{{ movie.Price }} SEK</h5>
+
+  <button class="btn btn-outline-info" (click)="addToCart()">
+    Add to cart
+  </button>
+  <button class="btn btn-outline-info">
+    <a routerLink="product/{{ movie.Id }}">Read more</a>
+  </button>
+</div>

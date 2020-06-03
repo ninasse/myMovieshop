@@ -1,0 +1,12 @@
+h3 {
+  text-align: center;
+}
+.movie-list-container {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  .movie-container {
+    max-width: 30%;
+    min-width: 30%;
+  }
+}
