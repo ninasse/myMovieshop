@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import Movie from '../models/Movie';
+import Movie from '../../models/Movie';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MovieService {
-  movies = new Subject<Movie[]>();
-  selectedMovie = new Subject<Movie>();
+  moviesSource = new Subject<Movie[]>();
+  selectedMovieSource = new Subject<Movie>();
+
   constructor(private http: HttpClient) {}
 
   getMoviesFromApi() {
@@ -20,20 +21,26 @@ export class MovieService {
         //console.log(data);
         let moviesFromApi: Movie[] = data.map((m) => {
           const movie = new Movie();
+          movie.quantity = 1;
           movie.Id = m.id;
           movie.Title = m.name;
           movie.Descr = m.description;
           movie.ImgUrl = m.imageUrl;
           movie.ReleaseYear = m.year;
           movie.Price = m.price;
-          //movie.Category = m.productCategory.map((m) => {
+          // movie.Category = m.productCategory.map((m) => {
           //  movie.Category.CatId = m.productCategory.categoryId;
           //  });
           //console.log(movie);
           return movie;
         });
         //console.log(moviesFromApi);
-        this.movies.next(moviesFromApi);
+        this.moviesSource.next(moviesFromApi);
       });
+  }
+
+  selectedProductToCart(selectedMovie: Movie) {
+    this.selectedMovieSource.next(selectedMovie);
+    console.log(selectedMovie);
   }
 }

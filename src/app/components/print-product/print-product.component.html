@@ -1,15 +1,19 @@
-<div>
+<div class="movie-container">
   <h3>{{ movie.Title }}</h3>
   <p>{{ movie.Id }}</p>
   <img src="{{ movie.ImgUrl }}" alt="{{ movie.Title }}" class="movie-img" />
-  <p>{{ movie.Descr }}</p>
+  <div class="movie-descr">{{ movie.Descr }}</div>
   <p>{{ movie.ReleaseYear }}</p>
-  <h5>{{ movie.Price }} SEK</h5>
+  <p>
+    <b class="price-tag">{{ movie.Price }} SEK</b>
+  </p>
 
-  <button class="btn btn-outline-info" (click)="addToCart()">
+  <button class="btn btn-outline-info" (click)="addToCart($event)">
     Add to cart
   </button>
   <button class="btn btn-outline-info">
-    <a routerLink="product/{{ movie.Id }}">Read more</a>
+    <a routerLink="product/{{ movie.Id }}" routerLinkActive="active">
+      Read more</a
+    >
   </button>
 </div>

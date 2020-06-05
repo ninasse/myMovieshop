@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  h2 {
+    text-align: center;
+  }
+  .selected-movie-img {
+    width: 70%;
+  }
+}

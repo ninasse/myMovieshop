@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieService } from 'src/app/services/movie.service';
+import { MovieService } from 'src/app/services/movieService/movie.service';
 import Movie from 'src/app/models/Movie';
 
 @Component({
@@ -19,12 +19,16 @@ export class ProductInformationComponent implements OnInit {
       this.id = p.id;
       console.log(this.id);
     });
-    this.service.movies.subscribe((m: Movie[]) => {
-      console.log(m);
+    this.service.moviesSource.subscribe((m: Movie[]) => {
+      //console.log(m);
       this.selectedMovie = m.find((movie: Movie) => movie.Id == this.id);
 
       console.log(this.selectedMovie);
     });
     this.service.getMoviesFromApi();
+  }
+  addToCart() {
+    console.log(this.selectedMovie);
+    this.service.selectedProductToCart(this.selectedMovie);
   }
 }

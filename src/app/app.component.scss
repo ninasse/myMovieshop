@@ -1,0 +1,14 @@
+nav {
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    a {
+      text-decoration: none;
+      &.active {
+        text-decoration: overline;
+        color: palevioletred;
+      }
+    }
+  }
+}

@@ -1,6 +1,12 @@
-<h3>Movies in stock</h3>
-<div class="movie-list-container">
-  <div *ngFor="let movie of movies" class="movie-container">
-    <app-print-product [movie]="movie"></app-print-product>
+<h2 class="my-4">Movies in stock</h2>
+<div *ngIf="movies.length >= 1" class="movie-list-container">
+  <div *ngFor="let movie of movies" class="movie-container my-3">
+    <app-print-product
+      [movie]="movie"
+      (addedToCart)="addProductToCart($event)"
+    ></app-print-product>
   </div>
+  <!-- <div>
+    <app-product-information (addedToCart)="addProductToCart($event)"></app-product-information>
+  </div> -->
 </div>
