@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'src/app/services/movieService/movie.service';
 import Movie from 'src/app/models/Movie';
+import { CartService } from 'src/app/services/cartService/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -9,30 +10,22 @@ import Movie from 'src/app/models/Movie';
 })
 export class ProductsComponent implements OnInit {
   movies: Movie[] = [];
-  cart: Movie[] = JSON.parse(localStorage.getItem('Cartitems')) || [];
-  q: number;
-  constructor(private service: MovieService) {}
-
-  addProductToCart(addedMovie: Movie) {
-    let movieIncart = this.cart.find((m) => m.Id === addedMovie.Id);
-    console.log(movieIncart);
-    if (!movieIncart) {
-      this.cart.push({ ...addedMovie });
-      localStorage.setItem('Cartitems', JSON.stringify(this.cart));
-      return;
-    }
-    addedMovie.quantity++;
-    console.log(`${addedMovie.Id} has been addded to cart!`);
-    localStorage.setItem('Cartitems', JSON.stringify(this.cart));
+  constructor(
+    private movieService: MovieService,
+    private cartService: CartService
+  ) {}
+  addProductToCart(selectedMovie: Movie) {
+    this.cartService.addItemToCart(selectedMovie);
+    //console.log(`${selectedMovie.Id}HAS BEEN ADDED TO CART`);
   }
   ngOnInit(): void {
-    this.service.moviesSource.subscribe((m: Movie[]) => {
+    this.movieService.moviesSource.subscribe((m: Movie[]) => {
       //console.log(m);
       this.movies = m;
     });
-    this.service.selectedMovieSource.subscribe((movie: Movie) => {
+    this.movieService.selectedMovieSource.subscribe((movie: Movie) => {
       this.addProductToCart(movie);
     });
-    this.service.getMoviesFromApi();
+    this.movieService.getMoviesFromApi();
   }
 }

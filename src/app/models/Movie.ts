@@ -6,5 +6,4 @@ export default class Movie {
   ReleaseYear: number;
   // Category: [{ CatId: number }];
   Price: number;
-  quantity: number;
 }

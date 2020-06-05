@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/services/movieService/movie.service';
 import Movie from 'src/app/models/Movie';
+import { CartService } from 'src/app/services/cartService/cart.service';
 
 @Component({
   selector: 'app-product-information',
@@ -12,23 +13,26 @@ export class ProductInformationComponent implements OnInit {
   id: number;
   selectedMovie: Movie;
   movies: Movie[] = [];
-  constructor(private route: ActivatedRoute, private service: MovieService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private movieService: MovieService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((p) => {
       this.id = p.id;
       console.log(this.id);
     });
-    this.service.moviesSource.subscribe((m: Movie[]) => {
+    this.movieService.moviesSource.subscribe((m: Movie[]) => {
       //console.log(m);
       this.selectedMovie = m.find((movie: Movie) => movie.Id == this.id);
-
-      console.log(this.selectedMovie);
+      //console.log(this.selectedMovie);
     });
-    this.service.getMoviesFromApi();
+    this.movieService.getMoviesFromApi();
   }
   addToCart() {
-    console.log(this.selectedMovie);
-    this.service.selectedProductToCart(this.selectedMovie);
+    this.cartService.addItemToCart(this.selectedMovie);
+    console.log(`${this.selectedMovie.Id}HAS BEEN ADDED TO CART`);
   }
 }

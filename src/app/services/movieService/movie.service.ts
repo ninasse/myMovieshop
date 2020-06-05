@@ -21,7 +21,6 @@ export class MovieService {
         //console.log(data);
         let moviesFromApi: Movie[] = data.map((m) => {
           const movie = new Movie();
-          movie.quantity = 1;
           movie.Id = m.id;
           movie.Title = m.name;
           movie.Descr = m.description;
@@ -38,9 +37,7 @@ export class MovieService {
         this.moviesSource.next(moviesFromApi);
       });
   }
-
   selectedProductToCart(selectedMovie: Movie) {
     this.selectedMovieSource.next(selectedMovie);
-    console.log(selectedMovie);
   }
 }
