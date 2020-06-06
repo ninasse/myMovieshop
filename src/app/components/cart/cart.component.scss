@@ -1,0 +1,28 @@
+.container {
+  h2 {
+    text-align: center;
+  }
+  .cart-head {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    .cart-item-title {
+      max-width: 10rem;
+      min-width: 10rem;
+    }
+  }
+  .cart-items-container {
+    .cart-item {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      .cart-quantity {
+        display: flex;
+      }
+      .cart-item-title {
+        max-width: 10rem;
+        min-width: 10rem;
+      }
+    }
+  }
+}
