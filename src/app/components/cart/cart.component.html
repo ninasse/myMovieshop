@@ -1,21 +1,28 @@
 <div class="container">
   <h2>Cart</h2>
-  <div class="cart-head">
-    <h5 class="cart-item-title"><b>Title</b></h5>
-    <div><b>Quantity</b></div>
-    <div><b>Price</b></div>
-    <div><b>Total</b></div>
-  </div>
-  <div class="cart-items-container" *ngFor="let item of cart">
-    <div class="cart-item">
-      <p class="cart-item-title">{{ item.Title }}</p>
-      <div class="cart-quantity">
-        <button class="btn">+</button>
-        <p>{{ item.quantity }}</p>
-        <button class="btn" (click)="decreaseFromCart(item)">-</button>
+  <div *ngIf="cart.length >= 1; else emptyCart" class="cart-container">
+    <div class="cart-head">
+      <h5 class="cart-item-title"><b>Title</b></h5>
+      <div><b>Quantity</b></div>
+      <div><b>Price</b></div>
+      <div><b>Total</b></div>
+    </div>
+    <div class="cart-items-container" *ngFor="let item of cart">
+      <div class="cart-item">
+        <p class="cart-item-title">{{ item.Title }}</p>
+        <div class="cart-quantity">
+          <button class="btn" (click)="increaseItemInCart(item)">+</button>
+          <p>{{ item.quantity }}</p>
+          <button class="btn" (click)="decreaseFromCart(item)">-</button>
+        </div>
+        <p>{{ item.Price }}</p>
+        <p>{{ item.total }}</p>
       </div>
-      <p>{{ item.Price }}</p>
-      <p>{{ item.total }}</p>
     </div>
   </div>
+  <ng-template #emptyCart>
+    <div>
+      <h3>Your cart is empty!</h3>
+    </div>
+  </ng-template>
 </div>
