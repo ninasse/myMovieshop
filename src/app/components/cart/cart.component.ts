@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cartService/cart.service';
-import Movie from 'src/app/models/Movie';
 import { MovieService } from 'src/app/services/movieService/movie.service';
+import CartItem from 'src/app/models/CartItem';
 
 @Component({
   selector: 'app-cart',
@@ -9,26 +9,29 @@ import { MovieService } from 'src/app/services/movieService/movie.service';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  cart = [];
-  movieId: number;
-  movieIncart;
+  cart: CartItem[] = [];
+  movieIncart: CartItem;
 
-  constructor(
-    private cartService: CartService,
-    private movieService: MovieService
-  ) {}
+  constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.movieService.selectedMovieSource.subscribe((movie: Movie) => {
-      //this.removeFromCart(movie);
-      this.movieId = movie.Id;
+    this.cartService.cartSource.subscribe((items: CartItem[]) => {
+      this.cart = items;
     });
-
     this.cart = this.cartService.getCartItems();
-    console.log(this.movieId);
+    console.log(this.cart);
+
+    this.cartService.selectedItemInCartSource.subscribe((item: CartItem) => {
+      this.movieIncart = item;
+      this.cartService.selectedItemToAdjust(item);
+    });
+    console.log(this.movieIncart);
   }
-  decreaseFromCart(selectedMovie) {
-    this.cartService.decreaseCartItem(selectedMovie);
-    console.log(`${selectedMovie.Id} TO BE REMOVED`);
+  decreaseFromCart(item: CartItem) {
+    this.cartService.selectedItemInCartSource.subscribe((item: CartItem) => {
+      this.movieIncart = item;
+    });
+    this.cartService.decreaseCartItem(item);
+    console.log(`${item.Id} TO BE REMOVED`);
   }
 }

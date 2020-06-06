@@ -35,8 +35,4 @@ export class ProductInformationComponent implements OnInit {
     this.cartService.addItemToCart(this.selectedMovie);
     console.log(`${this.selectedMovie.Id}HAS BEEN ADDED TO CART`);
   }
-  decreaseFromCart() {
-    this.cartService.decreaseCartItem(this.selectedMovie);
-    console.log(`${this.selectedMovie.Id}HAS BEEN REMOVED FROM CART`);
-  }
 }
