@@ -1,2 +1,7 @@
-<app-cart></app-cart>
-<p>checkout works!</p>
+<app-cart (sum)="grandTotal($event)"></app-cart>
+<div class="my-5">
+  <app-customer></app-customer>
+</div>
+<div class="my-5">
+  <app-order-payment [totalAmmount]="totalAmmount"></app-order-payment>
+</div>

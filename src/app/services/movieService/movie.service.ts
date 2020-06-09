@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import Movie from '../../models/Movie';
+import IMovieService from './IMovieService';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MovieService {
-  moviesSource = new Subject<Movie[]>();
-  selectedMovieSource = new Subject<Movie>();
+export class MovieService implements IMovieService {
+  moviesSource: Subject<Movie[]> = new Subject<Movie[]>();
+  selectedMovieSource: Subject<Movie> = new Subject<Movie>();
 
   constructor(private http: HttpClient) {}
 

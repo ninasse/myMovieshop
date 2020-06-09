@@ -2,28 +2,29 @@ import { Injectable } from '@angular/core';
 import Movie from 'src/app/models/Movie';
 import { Subject } from 'rxjs';
 import CartItem from 'src/app/models/CartItem';
+import ICartService from './ICartService';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CartService {
+export class CartService implements ICartService {
   cartItems = JSON.parse(localStorage.getItem('Cartitems')) || [];
-  cartSource = new Subject<CartItem[]>();
-  selectedMovieSource = new Subject<Movie>();
-  selectedItemInCartSource = new Subject<CartItem>();
+  cartSource: Subject<CartItem[]> = new Subject<CartItem[]>();
+  selectedMovieSource: Subject<Movie> = new Subject<Movie>();
+  selectedItemInCartSource: Subject<CartItem> = new Subject<CartItem>();
   movieIncart: CartItem;
   constructor() {}
 
   selectedItemToAdjust(selectedItem: CartItem) {
     this.selectedItemInCartSource.next(selectedItem);
   }
+
   increaseCartItem(item: CartItem) {
     this.movieIncart = this.cartItems.find((m) => m.Id === item.Id);
     console.log(this.movieIncart);
     this.movieIncart.quantity += 1;
     this.movieIncart.total = this.movieIncart.Price * this.movieIncart.quantity;
     localStorage.setItem('Cartitems', JSON.stringify(this.cartItems));
-
     return this.movieIncart;
   }
   addItemToCart(selectedMovie: Movie) {
@@ -44,7 +45,7 @@ export class CartService {
     return this.cartItems;
   }
   removeItemFromCart() {
-    if (this.movieIncart.quantity == 0) {
+    if (this.movieIncart.quantity <= 0) {
       this.cartItems = this.cartItems.filter(
         (item: CartItem) => this.movieIncart.Id !== item.Id
       );

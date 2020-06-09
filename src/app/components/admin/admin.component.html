@@ -1,1 +1,16 @@
-<p>admin works!</p>
+<div class="container">
+  <h2>Orders</h2>
+  <div *ngIf="orders.length >= 1; else noOrdersToDisplay">
+    <div *ngFor="let order of orders" class="orderlist-container">
+      <div class="order-container">
+        <p>{{ order.id }}</p>
+        <p>{{ order.orderRows }}</p>
+      </div>
+    </div>
+  </div>
+  <ng-template #noOrdersToDisplay>
+    <div>
+      <h3>No orders to diplay!</h3>
+    </div>
+  </ng-template>
+</div>

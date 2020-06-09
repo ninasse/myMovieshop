@@ -1,9 +1,17 @@
-<h2 class="my-4">Movies in stock</h2>
-<div *ngIf="movies.length >= 1" class="movie-list-container">
-  <div *ngFor="let movie of movies" class="movie-container my-3">
-    <app-print-product
-      [movie]="movie"
-      (addedToCart)="addProductToCart($event)"
-    ></app-print-product>
+<div>
+  <h2 class="my-4">Movies in stock</h2>
+  <div
+    *ngIf="movies.length >= 1; else noMoviesFound"
+    class="movie-list-container"
+  >
+    <div *ngFor="let movie of movies" class="movie-container my-3">
+      <app-print-product
+        [movie]="movie"
+        (addedToCart)="addProductToCart($event)"
+      ></app-print-product>
+    </div>
   </div>
+  <ng-template #noMoviesFound>
+    <h3>Our stock is currently empty!</h3>
+  </ng-template>
 </div>

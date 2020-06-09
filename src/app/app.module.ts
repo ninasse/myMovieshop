@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -12,6 +12,8 @@ import { ProductsComponent } from './components/products/products.component';
 import { ProductInformationComponent } from './components/product-information/product-information.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { CustomerComponent } from './components/customer/customer.component';
+import { OrderPaymentComponent } from './components/order-payment/order-payment.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +26,15 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     ProductInformationComponent,
     CartComponent,
     CheckoutComponent,
+    CustomerComponent,
+    OrderPaymentComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

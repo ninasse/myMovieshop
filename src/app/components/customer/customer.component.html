@@ -1,0 +1,122 @@
+<div class="container">
+  <h2>Checkout</h2>
+  <div class="row">
+    <form
+      [formGroup]="customerDetails"
+      (ngSubmit)="saveCustomerDeatils()"
+      class="col-6 mx-auto"
+    >
+      <div class="form-group">
+        <label for="first-name">First name</label>
+        <input
+          type="text"
+          formControlName="fName"
+          class="form-control"
+          required
+        />
+        <div *ngIf="fName.touched && fName.invalid">
+          <div *ngIf="fName.errors.required" class="err-msg">
+            This field is mandatory. First name is missing!
+          </div>
+          <div *ngIf="fName.errors.minlength" class="err-msg">
+            First name must contain at least 2 letters.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="last-name">Lastname</label>
+        <input
+          type="text"
+          formControlName="lName"
+          class="form-control"
+          required
+        />
+        <div *ngIf="lName.touched && lName.invalid">
+          <div *ngIf="lName.errors.required" class="err-msg">
+            This field is mandatory. Last name is missing!
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">e-mail</label>
+        <input
+          type="email"
+          formControlName="email"
+          class="form-control"
+          required
+        />
+        <div *ngIf="email.touched && email.invalid">
+          <div *ngIf="email.errors.required" class="err-msg">
+            This field is mandatory. Email is missing!
+          </div>
+          <div *ngIf="email.errors.email" class="err-msg">
+            Please provide e-mail in this format: name@email.mail
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+          type="text"
+          formControlName="phone"
+          class="form-control"
+          required
+        />
+        <div *ngIf="phone.touched && phone.invalid">
+          <div *ngIf="phone.errors.required" class="err-msg">
+            This field is mandatory. Phone number name is missing!
+          </div>
+        </div>
+      </div>
+      <div formGroupName="address" class="no-validate">
+        <div class="form-group">
+          <label for="street">Street</label>
+          <input
+            type="text"
+            formControlName="street"
+            class="form-control"
+            required
+          />
+          <div *ngIf="street.touched && street.invalid">
+            <div *ngIf="street.errors.required" class="err-msg">
+              This field is mandatory. Street is missing!
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="zip">Zip code</label>
+          <input
+            type="text"
+            formControlName="zip"
+            class="form-control"
+            required
+          />
+          <div *ngIf="zip.touched && zip.invalid">
+            <div *ngIf="zip.errors.required" class="err-msg">
+              This field is mandatory. Zip code is missing!
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input
+            type="text"
+            formControlName="city"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="text-right">
+        <button
+          type="submit"
+          [disabled]="!customerDetails.valid"
+          class="btn btn-info"
+        >
+          Send
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

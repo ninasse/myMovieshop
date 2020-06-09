@@ -11,13 +11,32 @@
       <div class="cart-item">
         <p class="cart-item-title">{{ item.Title }}</p>
         <div class="cart-quantity">
-          <button class="btn" (click)="increaseItemInCart(item)">+</button>
+          <button
+            class="btn alter-ammount-button"
+            (click)="increaseItemInCart(item)"
+          >
+            +
+          </button>
           <p>{{ item.quantity }}</p>
-          <button class="btn" (click)="decreaseFromCart(item)">-</button>
+          <button
+            class="btn alter-ammount-button"
+            (click)="decreaseFromCart(item)"
+          >
+            -
+          </button>
         </div>
         <p>{{ item.Price }}</p>
         <p>{{ item.total }}</p>
       </div>
+    </div>
+    <div class="total-ammount-container">
+      <h5 class="total-text">order total:</h5>
+      <h5>{{ totalSum }}</h5>
+    </div>
+    <div class="text-right">
+      <button (click)="submitCart()" class="btn btn-outline-info">
+        Submit cart
+      </button>
     </div>
   </div>
   <ng-template #emptyCart>
