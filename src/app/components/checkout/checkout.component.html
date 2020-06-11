@@ -1,7 +1,13 @@
 <app-cart (sum)="grandTotal($event)"></app-cart>
 <div class="my-5">
-  <app-customer></app-customer>
+  <app-customer
+    (customerSubmitted)="saveCustomerDetails($event)"
+  ></app-customer>
 </div>
 <div class="my-5">
-  <app-order-payment [totalAmmount]="totalAmmount"></app-order-payment>
+  <app-order-payment
+    [totalAmmount]="totalAmmount"
+    [customer]="customer"
+    (submittedOrder)="saveOrder($event)"
+  ></app-order-payment>
 </div>

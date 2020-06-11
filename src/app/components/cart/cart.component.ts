@@ -17,7 +17,6 @@ export class CartComponent implements OnInit {
 
   getTotalSum() {
     this.totalSum = this.cart.reduce((sum, item) => +sum + +item.total, 0);
-    console.log(this.totalSum);
     return this.totalSum;
   }
   decreaseFromCart(item: CartItem) {
@@ -37,11 +36,12 @@ export class CartComponent implements OnInit {
       this.cartService.selectedItemToAdjust(item);
     });
     this.cartService.increaseCartItem(item);
-    this.getTotalSum;
+    this.getTotalSum();
     console.log(`${item.Id} TO BE INCREASED`);
   }
   submitCart() {
     this.sum.emit(this.totalSum);
+    console.log(this.cart);
   }
   ngOnInit(): void {
     this.cartService.cartSource.subscribe((items: CartItem[]) => {
@@ -49,5 +49,6 @@ export class CartComponent implements OnInit {
     });
     this.cart = this.cartService.getCartItems();
     this.getTotalSum();
+    this.sum.emit(this.totalSum);
   }
 }

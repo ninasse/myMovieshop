@@ -3,7 +3,7 @@
   <div class="row">
     <form
       [formGroup]="paymentDetails"
-      (ngSubmit)="saveOrder()"
+      (ngSubmit)="submitOrder()"
       class="col-6 mx-auto"
     >
       <div class="form-group payment-radio-buttons">
@@ -30,7 +30,7 @@
           [disabled]="!paymentDetails.valid"
           class="btn btn-outline-info"
         >
-          Send
+          Submit order
         </button>
       </div>
     </form>

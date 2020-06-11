@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import Order from 'src/app/models/Order';
+import Order, { OrderRow } from 'src/app/models/Order';
 import { OrderService } from 'src/app/services/orderService/order.service';
 @Component({
   selector: 'app-admin',
@@ -9,9 +9,10 @@ import { OrderService } from 'src/app/services/orderService/order.service';
 export class AdminComponent implements OnInit {
   orders: Order[] = [];
   constructor(private orderService: OrderService) {}
+  deleteOrder() {}
 
   ngOnInit(): void {
-    this.orderService.ordersSourse.subscribe((orders: Order[]) => {
+    this.orderService.orderListSourse.subscribe((orders: Order[]) => {
       this.orders = orders;
       console.log(this.orders);
     });

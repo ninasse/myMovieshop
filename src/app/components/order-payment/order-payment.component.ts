@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import Order from 'src/app/models/Order';
-import CartItem from 'src/app/models/CartItem';
-import { CartService } from 'src/app/services/cartService/cart.service';
+import Order, { OrderRow } from 'src/app/models/Order';
+import Customer from 'src/app/models/Customer';
 
 @Component({
   selector: 'app-order-payment',
@@ -11,43 +10,47 @@ import { CartService } from 'src/app/services/cartService/cart.service';
 })
 export class OrderPaymentComponent implements OnInit {
   @Input() totalAmmount: number;
-  cart = [];
-  order: Order;
+  @Input() customer: Customer;
+  @Output() submittedOrder = new EventEmitter<Order>();
+  cart = JSON.parse(localStorage.getItem('Cartitems')) || [];
+  order;
   orderIsSubmitted = false;
+  orderRows: OrderRow[];
+
+  filteredOrderRows: OrderRow[] = this.cart.map((c) => {
+    const orderRow = new OrderRow();
+    orderRow.productId = c.Id;
+    orderRow.amount = c.quantity;
+    return orderRow;
+  });
 
   paymentDetails = this.fb.group({
     paymentMethod: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder, private cartService: CartService) {}
+  constructor(private fb: FormBuilder) {}
   get paymentMethod() {
     return this.paymentDetails.get('paymentMethod');
   }
-  createOrder(sum) {
-    let newOrder: Order = new Order();
-    let randomNumber = Math.floor(Math.random() * 1000 + 1);
-    newOrder.id = randomNumber;
-    newOrder.companyId = 8585;
-    newOrder.created = new Date().toLocaleString();
-    newOrder.createdBy = 'GOD!';
-    newOrder.paymentMethod = this.paymentDetails.value.paymentMethod;
-    newOrder.totalPrice = this.totalAmmount;
-    newOrder.status = 1;
-    newOrder.orderRows = this.cart;
+
+  createOrder() {
+    let newOrder = {
+      companyId: 8585,
+      created: new Date().toLocaleString(),
+      createdBy: this.customer.firstname + this.customer.lastname,
+      paymentMethod: this.paymentDetails.value.paymentMethod,
+      totalPrice: this.totalAmmount,
+      status: 0,
+      orderRows: this.filteredOrderRows,
+    };
+    console.log(newOrder);
     this.order = newOrder;
-    return this.order;
+    return newOrder;
   }
-  saveOrder() {
-    this.createOrder(this.order);
+  submitOrder() {
+    this.createOrder();
     this.orderIsSubmitted = true;
-    console.log(this.order);
-    console.log(this.paymentDetails.value);
+    this.submittedOrder.emit(this.order);
   }
-  ngOnInit(): void {
-    this.cartService.cartSource.subscribe((items: CartItem[]) => {
-      this.cart = items;
-    });
-    this.cart = this.cartService.getCartItems();
-    console.log(this.cart);
-  }
+  ngOnInit(): void {}
 }

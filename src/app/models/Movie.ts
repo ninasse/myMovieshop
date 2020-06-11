@@ -7,3 +7,8 @@ export default class Movie {
   // Category: [{ CatId: number }];
   Price: number;
 }
+
+export class ProductCategory {
+  categoryId: number;
+  category: string;
+}

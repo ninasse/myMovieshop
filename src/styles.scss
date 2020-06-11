@@ -1,4 +1,36 @@
+html,
 body {
-  background-color: midnightblue;
+  min-height: 100%;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    45deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 59, 121, 1) 90%,
+    rgba(5, 77, 179, 1) 100%
+  );
   color: aliceblue;
+  a {
+    color: #4fc4d6;
+
+    &:hover {
+      color: aliceblue;
+      border-bottom: 1px solid #4fc4d6;
+    }
+  }
+  buttton {
+    color: #4fc4d6;
+    &:hover {
+      color: aliceblue;
+    }
+  }
+  body {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  @media screen and (min-width: 768px) {
+    body {
+      font-size: 16px;
+    }
+  }
 }

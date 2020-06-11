@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import Customer from 'src/app/models/Customer';
 
@@ -8,6 +8,8 @@ import Customer from 'src/app/models/Customer';
   styleUrls: ['./customer.component.scss'],
 })
 export class CustomerComponent implements OnInit {
+  @Output() customerSubmitted = new EventEmitter<Customer>();
+  customer: Customer;
   customerDetails = this.fb.group({
     fName: ['', [Validators.required, Validators.minLength(2)]],
     lName: ['', Validators.required],
@@ -20,7 +22,6 @@ export class CustomerComponent implements OnInit {
     }),
   });
 
-  customer: Customer;
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {}
@@ -61,6 +62,7 @@ export class CustomerComponent implements OnInit {
 
   saveCustomerDeatils() {
     this.createNewCustomer();
+    this.customerSubmitted.emit(this.customer);
     console.log(this.customer);
     console.log(`${this.customerDetails.value.fName} placed an order!`);
   }

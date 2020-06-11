@@ -1,5 +1,3 @@
-import CartItem from './CartItem';
-
 export default class Order {
   id: number;
   companyId: number;
@@ -8,5 +6,10 @@ export default class Order {
   paymentMethod: string;
   totalPrice: number;
   status: number;
-  orderRows: Array<CartItem[]>;
+  orderRows: OrderRow[];
+}
+
+export class OrderRow {
+  productId: number;
+  amount: number;
 }

@@ -27,6 +27,7 @@ export class CartService implements ICartService {
     localStorage.setItem('Cartitems', JSON.stringify(this.cartItems));
     return this.movieIncart;
   }
+
   addItemToCart(selectedMovie: Movie) {
     this.movieIncart = this.cartItems.find((m) => m.Id === selectedMovie.Id);
     if (!this.movieIncart) {
@@ -44,8 +45,9 @@ export class CartService implements ICartService {
   getCartItems() {
     return this.cartItems;
   }
+
   removeItemFromCart() {
-    if (this.movieIncart.quantity <= 0) {
+    if (this.movieIncart.quantity <= 1) {
       this.cartItems = this.cartItems.filter(
         (item: CartItem) => this.movieIncart.Id !== item.Id
       );
@@ -53,16 +55,16 @@ export class CartService implements ICartService {
       console.log(this.cartItems);
       return this.cartItems;
     }
+    this.getCartItems();
   }
 
   decreaseCartItem(item: CartItem) {
     this.movieIncart = item;
-    if (this.movieIncart.quantity >= 1) {
+    if (this.movieIncart.quantity > 1) {
       this.movieIncart.quantity--;
       this.movieIncart.total =
         this.movieIncart.Price * this.movieIncart.quantity;
       localStorage.setItem('Cartitems', JSON.stringify(this.cartItems));
-      console.log(this.movieIncart.Id + 'TO BE REMOVED');
       return this.movieIncart;
     } else {
       this.removeItemFromCart();

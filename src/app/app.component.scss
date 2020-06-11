@@ -12,3 +12,17 @@ nav {
     }
   }
 }
+main {
+  flex: 1 0 auto;
+}
+footer {
+  flex-shrink: 0;
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      color: #4fc4d6;
+    }
+  }
+}
