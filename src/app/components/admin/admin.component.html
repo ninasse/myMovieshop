@@ -14,9 +14,11 @@
             <li>Amount: {{ row.amount }}</li>
           </ul>
         </div>
-        <button class="btn btn-outline-info" (click)="deleteOrder()">
-          Delete order
-        </button>
+        <div>
+          <button class="btn btn-outline-info" (click)="deleteOrder(order)">
+            Delete order
+          </button>
+        </div>
       </div>
     </div>
   </div>

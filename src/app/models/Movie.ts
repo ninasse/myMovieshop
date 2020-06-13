@@ -4,7 +4,7 @@ export default class Movie {
   Descr: string;
   ImgUrl: string;
   ReleaseYear: number;
-  // Category: [{ CatId: number }];
+  Category: ProductCategory[];
   Price: number;
 }
 

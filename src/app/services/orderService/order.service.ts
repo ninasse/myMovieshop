@@ -8,9 +8,13 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class OrderService {
+  orderAPI =
+    'https://medieinstitutet-wie-products.azurewebsites.net/api/orders';
+  companyID = '8585';
   orderListSourse: Subject<Order[]> = new Subject<Order[]>();
   orderSourse: Subject<Order> = new Subject<Order>();
   orderInDB: Order;
+  orderList: Order[];
   submittedOrder = JSON.stringify(Order);
 
   constructor(private http: HttpClient) {}
@@ -19,11 +23,9 @@ export class OrderService {
     order = JSON.stringify(order);
     console.log('hej från Order Service!' + order);
     this.http
-      .post(
-        'https://medieinstitutet-wie-products.azurewebsites.net/api/orders',
-        order,
-        { headers: { 'content-type': 'application/json' } }
-      )
+      .post(this.orderAPI, order, {
+        headers: { 'content-type': 'application/json' },
+      })
       .subscribe(
         (data: string) => {
           this.submittedOrder = data;
@@ -38,9 +40,7 @@ export class OrderService {
 
   getOrdersFromApi() {
     this.http
-      .get(
-        'https://medieinstitutet-wie-products.azurewebsites.net/api/orders?companyId=8585'
-      )
+      .get(this.orderAPI + '?companyId=' + this.companyID)
       .subscribe((data: any) => {
         let ordersFromApi: Order[] = data.map((o) => {
           const order = new Order();
@@ -50,18 +50,31 @@ export class OrderService {
           order.createdBy = o.createdBy;
           order.paymentMethod = o.paymentMethod;
           order.totalPrice = o.totalPrice;
-          let orderObjects: OrderRow[] = o.orderRows.map((or) => {
+          let orderObjects: OrderRow[] = o.orderRows.map((row) => {
             const orderRow = new OrderRow();
-            orderRow.productId = or.productId;
-            orderRow.amount = or.amount;
+            orderRow.productId = row.productId;
+            orderRow.amount = row.amount;
             return orderRow;
           });
           order.orderRows = orderObjects;
-
           return order;
         });
         this.orderListSourse.next(ordersFromApi);
-        console.log(ordersFromApi);
+        this.orderList = ordersFromApi;
+        console.log(this.orderList);
+      });
+  }
+
+  getOrders() {
+    return this.orderList;
+  }
+
+  removeOrder(order: Order) {
+    this.http
+      .delete(this.orderAPI + '/' + order.id)
+      .subscribe((deletedOrder: Order) => {
+        console.log(`Delete this order${deletedOrder.id}`);
+        this.orderSourse.next(deletedOrder);
       });
   }
 }
