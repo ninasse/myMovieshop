@@ -16,7 +16,6 @@ export class ProductsComponent implements OnInit {
   ) {}
   addProductToCart(selectedMovie: Movie) {
     this.cartService.addItemToCart(selectedMovie);
-    //console.log(`${selectedMovie.Id}HAS BEEN ADDED TO CART`);
   }
   ngOnInit(): void {
     this.movieService.moviesSource.subscribe((m: Movie[]) => {

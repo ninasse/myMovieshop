@@ -1,19 +1,18 @@
 <div class="container">
   <div *ngIf="selectedMovie === undefined; else selectedMovieToDisplay">
-    <h3>Go back and select a movie to display!</h3>
+    <h3 class="text-center">Go back and select a movie to display!</h3>
   </div>
   <ng-template #selectedMovieToDisplay>
     <div class="selected-movie-container">
       <h2>{{ selectedMovie.Title }}</h2>
-      <p>ID is {{ selectedMovie.Id }}!</p>
       <img
         src="{{ selectedMovie.ImgUrl }}"
         alt="{{ selectedMovie.Title }}"
-        class="selected-movie-img mx-auto"
+        class="selected-movie-img"
       />
       <p>{{ selectedMovie.Descr }}</p>
-      <p>{{ selectedMovie.ReleaseYear }}</p>
-      <h5>{{ selectedMovie.Price }} SEK</h5>
+      <p>Release year: {{ selectedMovie.ReleaseYear }}</p>
+      <h5 class="text-right">{{ selectedMovie.Price }} SEK</h5>
       <button class="btn btn-outline-info" (click)="addToCart()">
         Add to cart
       </button>

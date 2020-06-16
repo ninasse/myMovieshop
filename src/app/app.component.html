@@ -13,6 +13,9 @@
         <a routerLink="products" routerLinkActive="active">Movies</a>
       </li>
       <li>
+        <a class="title-link" routerLink="">{{ title }}</a>
+      </li>
+      <li>
         <a routerLink="checkout" routerLinkActive="active">Cart</a>
       </li>
       <li>
@@ -21,7 +24,7 @@
     </ul>
   </nav>
 </header>
-<main class="mt-5">
+<main class="my-5">
   <router-outlet></router-outlet>
 </main>
 <footer class="mt-5">

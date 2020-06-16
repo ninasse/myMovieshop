@@ -25,14 +25,11 @@ export class ProductInformationComponent implements OnInit {
       console.log(this.id);
     });
     this.movieService.moviesSource.subscribe((m: Movie[]) => {
-      //console.log(m);
       this.selectedMovie = m.find((movie: Movie) => movie.Id == this.id);
-      //console.log(this.selectedMovie);
     });
     this.movieService.getMoviesFromApi();
   }
   addToCart() {
     this.cartService.addItemToCart(this.selectedMovie);
-    console.log(`${this.selectedMovie.Id}HAS BEEN ADDED TO CART`);
   }
 }

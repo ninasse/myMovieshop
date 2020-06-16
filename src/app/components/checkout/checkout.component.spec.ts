@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CheckoutComponent } from './checkout.component';
+import { OrderService } from 'src/app/services/orderService/order.service';
+import MockOrderService from 'src/app/services/orderService/MockOrderService';
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
@@ -8,9 +10,12 @@ describe('CheckoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CheckoutComponent ]
-    })
-    .compileComponents();
+      declarations: [CheckoutComponent],
+      providers: [
+        CheckoutComponent,
+        { provide: OrderService, useClass: MockOrderService },
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -21,7 +21,6 @@ export class CartService implements ICartService {
 
   increaseCartItem(item: CartItem) {
     this.movieIncart = this.cartItems.find((m) => m.Id === item.Id);
-    console.log(this.movieIncart);
     this.movieIncart.quantity += 1;
     this.movieIncart.total = this.movieIncart.Price * this.movieIncart.quantity;
     localStorage.setItem('Cartitems', JSON.stringify(this.cartItems));

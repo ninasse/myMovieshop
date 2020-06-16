@@ -40,9 +40,11 @@ export class HomeComponent implements OnInit {
       this.movies = m;
     });
     this.movieService.getMoviesFromApi();
-    this.movieService.categoriesSource.subscribe((cats: Category[]) => {
-      this.categories = cats;
-    });
+    this.movieService.categoriesSource.subscribe(
+      (listOfCategories: Category[]) => {
+        this.categories = listOfCategories;
+      }
+    );
     this.movieService.getCategoriesFromApi();
   }
 }

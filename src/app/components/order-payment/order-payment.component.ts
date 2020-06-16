@@ -43,14 +43,14 @@ export class OrderPaymentComponent implements OnInit {
       status: 0,
       orderRows: this.filteredOrderRows,
     };
-    console.log(newOrder);
     this.order = newOrder;
+    console.log(this.order);
     return newOrder;
   }
   submitOrder() {
     this.createOrder();
-    this.orderIsSubmitted = true;
     this.submittedOrder.emit(this.order);
+    this.orderIsSubmitted = true;
   }
   ngOnInit(): void {}
 }

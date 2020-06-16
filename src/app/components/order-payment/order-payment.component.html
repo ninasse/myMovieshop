@@ -23,6 +23,9 @@
           <input type="radio" formControlName="paymentMethod" value="Kisses" />
           <label for="kissesOption" class="mx-3">Kisses</label>
         </div>
+        <div *ngIf="paymentMethod.errors?.required" class="err-msg">
+          Please choose a payment method!
+        </div>
       </div>
       <div class="text-right">
         <button

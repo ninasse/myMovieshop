@@ -1,6 +1,11 @@
 div {
+  .movie-title {
+    min-height: 57px;
+  }
   .movie-img {
     width: 30%;
+    min-height: 270px;
+    max-height: 270px;
     display: block;
     margin: 0 auto;
   }

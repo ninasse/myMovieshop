@@ -1,9 +1,35 @@
 <div *ngIf="filteredMovies.length == 0; else showFilteredMovieList">
   <div class="container">
-    <h2>Hey there!</h2>
+    <h2 class="text-center my-5">Hey there!</h2>
     <div class="home-text">
       <p>What do you feel like watching?</p>
       <p>Choose the genre you're in the mood for!</p>
+      <div class="cats-buttons my-5">
+        <div *ngFor="let cat of categories">
+          <div class="category-button">
+            <button
+              class="btn btn-outline-info"
+              (click)="filterByCategory(cat)"
+            >
+              {{ cat.name }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <p>
+        Or go ahead and have a look att all the movies we have in stock right
+        now!
+      </p>
+      <button class="btn btn-outline-info">
+        <a routerLink="products">All Movies</a>
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #showFilteredMovieList>
+  <div class="show-selected">
+    <div class="cats-buttons my-5">
       <div *ngFor="let cat of categories">
         <div class="category-button">
           <button class="btn btn-outline-info" (click)="filterByCategory(cat)">
@@ -12,43 +38,32 @@
         </div>
       </div>
     </div>
-    <p>
-      Or go ahead and have a look att all movies we have in stock right now!
-    </p>
-    <button class="btn btn-outline-info">
-      <a routerLink="products">Movies</a>
-    </button>
-  </div>
-</div>
+    <div class="movie-list-container">
+      <div *ngFor="let movie of filteredMovies" class="movie-container my-5">
+        <h4 class="text-center movie-title">{{ movie.Title }}</h4>
 
-<ng-template #showFilteredMovieList>
-  <div *ngFor="let cat of categories">
-    <div class="category-button">
-      <button class="btn btn-outline-info" (click)="filterByCategory(cat)">
-        {{ cat.name }}
-      </button>
-    </div>
-  </div>
-  <div *ngFor="let movie of filteredMovies">
-    <div class="movie-container">
-      <h4 class="text-center">{{ movie.Title }}</h4>
-    </div>
-    <div>
-      <img src="{{ movie.ImgUrl }}" alt="{{ movie.Title }}" class="movie-img" />
-    </div>
-    <div class="movie-descr">{{ movie.Descr }}</div>
-    <p>
-      <b class="price-tag">{{ movie.Price }} SEK</b>
-    </p>
-    <div class="product-button">
-      <button class="btn btn-outline-info" (click)="addToCart(movie)">
-        Add to cart
-      </button>
-      <button class="btn btn-outline-info">
-        <a routerLink="product/{{ movie.Id }}" routerLinkActive="active">
-          Read more</a
-        >
-      </button>
+        <div>
+          <img
+            src="{{ movie.ImgUrl }}"
+            alt="{{ movie.Title }}"
+            class="movie-img"
+          />
+        </div>
+        <div class="movie-descr">{{ movie.Descr }}</div>
+        <p>
+          <b class="price-tag">{{ movie.Price }} SEK</b>
+        </p>
+        <div class="product-button">
+          <button class="btn btn-outline-info" (click)="addToCart(movie)">
+            Add to cart
+          </button>
+          <button class="btn btn-outline-info">
+            <a routerLink="product/{{ movie.Id }}" routerLinkActive="active">
+              Read more</a
+            >
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </ng-template>

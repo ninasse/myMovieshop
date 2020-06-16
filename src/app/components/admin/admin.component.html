@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container flex-grow-1">
   <h2>Orders</h2>
   <div *ngIf="orders.length >= 1; else noOrdersToDisplay">
     <div *ngFor="let order of orders" class="orderlist-container">
@@ -11,7 +11,10 @@
           <ul *ngFor="let row of order.orderRows">
             <li>Prod.ID: {{ row.productId }}</li>
 
-            <li>Amount: {{ row.amount }}</li>
+            <li>
+              <div>Amount:</div>
+              <div>{{ row.amount }}</div>
+            </li>
           </ul>
         </div>
         <div>

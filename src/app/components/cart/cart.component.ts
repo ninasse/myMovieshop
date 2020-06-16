@@ -9,9 +9,11 @@ import CartItem from 'src/app/models/CartItem';
 })
 export class CartComponent implements OnInit {
   @Output() sum = new EventEmitter<number>();
+  @Output() submittedCart = new EventEmitter<boolean>();
   cart: CartItem[] = JSON.parse(localStorage.getItem('Cartitems')) || [];
   movieIncart: CartItem;
   totalSum: number;
+  cartSubmitted: boolean;
 
   constructor(private cartService: CartService) {}
 
@@ -24,7 +26,6 @@ export class CartComponent implements OnInit {
       this.cartService.selectedItemToAdjust(item);
     });
     this.cartService.decreaseCartItem(item);
-    //console.log(`${item.Id} TO BE REMOVED`);
     this.cartService.cartSource.subscribe((items: CartItem[]) => {
       this.cart = items;
     });
@@ -37,11 +38,10 @@ export class CartComponent implements OnInit {
     });
     this.cartService.increaseCartItem(item);
     this.getTotalSum();
-    console.log(`${item.Id} TO BE INCREASED`);
   }
   submitCart() {
+    this.submittedCart.emit(this.cartSubmitted);
     this.sum.emit(this.totalSum);
-    console.log(this.cart);
   }
   ngOnInit(): void {
     this.cartService.cartSource.subscribe((items: CartItem[]) => {

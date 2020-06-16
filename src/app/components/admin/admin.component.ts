@@ -16,7 +16,7 @@ export class AdminComponent implements OnInit {
       this.order = order;
       this.orderService.getOrdersFromApi();
     });
-    console.log(this.order);
+
     this.orderService.removeOrder(order);
   }
 
@@ -24,7 +24,7 @@ export class AdminComponent implements OnInit {
     this.orderService.orderListSourse.subscribe((orders: Order[]) => {
       this.orders = orders;
     });
-    console.log(this.orders);
+
     this.orderService.getOrdersFromApi();
   }
 }

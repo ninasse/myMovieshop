@@ -1,13 +1,25 @@
-<app-cart (sum)="grandTotal($event)"></app-cart>
-<div class="my-5">
-  <app-customer
-    (customerSubmitted)="saveCustomerDetails($event)"
-  ></app-customer>
+<div class="my-5" *ngIf="orderSubmitted == false; else thankYouMessage">
+  <app-cart
+    (sum)="grandTotal($event)"
+    (submittedCart)="submitCart($event)"
+  ></app-cart>
+  <div class="my-5" *ngIf="cartSubmitted == true">
+    <app-customer
+      (customerSubmittedInformation)="saveCustomerDetails($event)"
+    ></app-customer>
+  </div>
+  <div class="my-5" *ngIf="customerSubmitted == false">
+    <app-order-payment
+      [totalAmmount]="totalAmmount"
+      [customer]="customer"
+      (submittedOrder)="saveOrder($event)"
+    ></app-order-payment>
+  </div>
 </div>
-<div class="my-5">
-  <app-order-payment
-    [totalAmmount]="totalAmmount"
-    [customer]="customer"
-    (submittedOrder)="saveOrder($event)"
-  ></app-order-payment>
+<div>
+  <ng-template #thankYouMessage>
+    <h2 class="text-center">Thank you!</h2>
+
+    <p class="text-center">Your order will be sent shortly!</p>
+  </ng-template>
 </div>

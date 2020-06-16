@@ -3,11 +3,12 @@ import { Subject } from 'rxjs';
 import Order, { OrderRow } from 'src/app/models/Order';
 
 import { HttpClient } from '@angular/common/http';
+import IOrderService from './IOrderService';
 
 @Injectable({
   providedIn: 'root',
 })
-export class OrderService {
+export class OrderService implements IOrderService {
   orderAPI =
     'https://medieinstitutet-wie-products.azurewebsites.net/api/orders';
   companyID = '8585';
@@ -36,33 +37,32 @@ export class OrderService {
           console.log(`Error from post request${error.statusText} `);
         }
       );
+    console.log(order);
   }
 
   getOrdersFromApi() {
-    this.http
-      .get(this.orderAPI + '?companyId=' + this.companyID)
-      .subscribe((data: any) => {
-        let ordersFromApi: Order[] = data.map((o) => {
-          const order = new Order();
-          order.id = o.id;
-          order.companyId = o.companyId;
-          order.created = o.created;
-          order.createdBy = o.createdBy;
-          order.paymentMethod = o.paymentMethod;
-          order.totalPrice = o.totalPrice;
-          let orderObjects: OrderRow[] = o.orderRows.map((row) => {
-            const orderRow = new OrderRow();
-            orderRow.productId = row.productId;
-            orderRow.amount = row.amount;
-            return orderRow;
-          });
-          order.orderRows = orderObjects;
-          return order;
+    this.http.get(this.orderAPI + '?companyId=8585').subscribe((data: any) => {
+      let ordersFromApi: Order[] = data.map((o) => {
+        const order = new Order();
+        order.id = o.id;
+        order.companyId = o.companyId;
+        order.created = o.created;
+        order.createdBy = o.createdBy;
+        order.paymentMethod = o.paymentMethod;
+        order.totalPrice = o.totalPrice;
+        let orderObjects: OrderRow[] = o.orderRows.map((row) => {
+          const orderRow = new OrderRow();
+          orderRow.productId = row.productId;
+          orderRow.amount = row.amount;
+          return orderRow;
         });
-        this.orderListSourse.next(ordersFromApi);
-        this.orderList = ordersFromApi;
-        console.log(this.orderList);
+        order.orderRows = orderObjects;
+        return order;
       });
+      this.orderListSourse.next(ordersFromApi);
+      this.orderList = ordersFromApi;
+      console.log(this.orderList);
+    });
   }
 
   getOrders() {
