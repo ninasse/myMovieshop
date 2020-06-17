@@ -43,6 +43,12 @@ export class CartComponent implements OnInit {
     this.submittedCart.emit(this.cartSubmitted);
     this.sum.emit(this.totalSum);
   }
+
+  clearCart() {
+    this.cartService.clearCart();
+    this.cart = [];
+  }
+
   ngOnInit(): void {
     this.cartService.cartSource.subscribe((items: CartItem[]) => {
       this.cart = items;

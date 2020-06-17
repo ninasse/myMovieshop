@@ -4,7 +4,6 @@ export default class CartItem {
   Descr: string;
   ImgUrl: string;
   ReleaseYear: number;
-  // Category: [{ CatId: number }];
   Price: number;
   quantity: number;
   total: number;

@@ -6,6 +6,14 @@ export class AppPage {
   }
 
   getTitleText(): Promise<string> {
-    return element(by.css('app-root .content span')).getText() as Promise<string>;
+    return element(by.css('app-root .title-link')).getText() as Promise<string>;
+  }
+
+  getAllMoviesButton(): Promise<string> {
+    return element(by.id('all-movies-button')).getText() as Promise<string>;
+  }
+
+  theAllMoviesButton() {
+    return element(by.id('all-movies-button'));
   }
 }

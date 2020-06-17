@@ -29,7 +29,6 @@ export class MovieService implements IMovieService {
 
   getMoviesFromApi() {
     this.http.get(this.moviesAPI).subscribe((data: any) => {
-      //console.log(data);
       let moviesFromAPI: Movie[] = data.map((m) => {
         const movie = new Movie();
         movie.Id = m.id;
@@ -57,7 +56,7 @@ export class MovieService implements IMovieService {
 
   getCategoriesFromApi() {
     this.http.get(this.categoriesAPI).subscribe((categoryData: any) => {
-      //console.log(categoryData);
+      console.log(categoryData);
       let catsFromAPI: Category[] = categoryData.map((cat) => {
         const category = new Category();
         category.id = cat.id;

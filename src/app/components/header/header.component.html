@@ -1,0 +1,27 @@
+<header>
+  <nav class="mt-3">
+    <ul>
+      <li>
+        <a
+          routerLink=""
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a routerLink="products" routerLinkActive="active">Movies</a>
+      </li>
+      <li>
+        <a class="title-link" routerLink="">{{ title }}</a>
+      </li>
+      <li>
+        <a routerLink="checkout" routerLinkActive="active">Cart</a>
+        <p *ngIf="numberOfItemsInCart >= 1">{{ numberOfItemsInCart }}</p>
+      </li>
+      <li>
+        <a routerLink="admin" routerLinkActive="active">Admin</a>
+      </li>
+    </ul>
+  </nav>
+</header>

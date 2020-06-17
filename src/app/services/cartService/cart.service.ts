@@ -10,13 +10,25 @@ import ICartService from './ICartService';
 export class CartService implements ICartService {
   cartItems = JSON.parse(localStorage.getItem('Cartitems')) || [];
   cartSource: Subject<CartItem[]> = new Subject<CartItem[]>();
+  itemsInCart: Subject<number> = new Subject<number>();
   selectedMovieSource: Subject<Movie> = new Subject<Movie>();
   selectedItemInCartSource: Subject<CartItem> = new Subject<CartItem>();
   movieIncart: CartItem;
+  numberOfItemsInCart: number;
+
   constructor() {}
 
   selectedItemToAdjust(selectedItem: CartItem) {
     this.selectedItemInCartSource.next(selectedItem);
+  }
+
+  showNumberOfItemsInCart(items: number) {
+    if (this.cartItems.length >= 1) {
+      this.numberOfItemsInCart = this.cartItems.reduce(function (a, b) {
+        return a + b.quantity;
+      }, 0);
+    }
+    this.itemsInCart.next(this.numberOfItemsInCart);
   }
 
   increaseCartItem(item: CartItem) {
@@ -24,6 +36,7 @@ export class CartService implements ICartService {
     this.movieIncart.quantity += 1;
     this.movieIncart.total = this.movieIncart.Price * this.movieIncart.quantity;
     localStorage.setItem('Cartitems', JSON.stringify(this.cartItems));
+    this.showNumberOfItemsInCart(this.numberOfItemsInCart);
     return this.movieIncart;
   }
 
@@ -35,6 +48,7 @@ export class CartService implements ICartService {
         quantity: 1,
         total: selectedMovie.Price,
       });
+      this.showNumberOfItemsInCart(this.numberOfItemsInCart);
       localStorage.setItem('Cartitems', JSON.stringify(this.cartItems));
       return;
     }
@@ -51,7 +65,7 @@ export class CartService implements ICartService {
         (item: CartItem) => this.movieIncart.Id !== item.Id
       );
       localStorage.setItem('Cartitems', JSON.stringify(this.cartItems));
-      console.log(this.cartItems);
+      this.showNumberOfItemsInCart(this.numberOfItemsInCart);
       return this.cartItems;
     }
     this.getCartItems();
@@ -64,6 +78,7 @@ export class CartService implements ICartService {
       this.movieIncart.total =
         this.movieIncart.Price * this.movieIncart.quantity;
       localStorage.setItem('Cartitems', JSON.stringify(this.cartItems));
+      this.showNumberOfItemsInCart(this.numberOfItemsInCart);
       return this.movieIncart;
     } else {
       this.removeItemFromCart();

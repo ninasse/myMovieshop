@@ -7,10 +7,7 @@
       <div class="cats-buttons my-5">
         <div *ngFor="let cat of categories">
           <div class="category-button">
-            <button
-              class="btn btn-outline-info"
-              (click)="filterByCategory(cat)"
-            >
+            <button class="btn" (click)="filterByCategory(cat)">
               {{ cat.name }}
             </button>
           </div>
@@ -20,9 +17,11 @@
         Or go ahead and have a look att all the movies we have in stock right
         now!
       </p>
-      <button class="btn btn-outline-info">
-        <a routerLink="products">All Movies</a>
-      </button>
+      <div class="category-button">
+        <button class="btn">
+          <a routerLink="products" id="all-movies-button">All Movies</a>
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -31,10 +30,15 @@
   <div class="show-selected">
     <div class="cats-buttons my-5">
       <div *ngFor="let cat of categories">
-        <div class="category-button">
-          <button class="btn btn-outline-info" (click)="filterByCategory(cat)">
-            {{ cat.name }}
-          </button>
+        <div *ngIf="cat.name !== null">
+          <div class="category-button my-5">
+            <button
+              class="btn btn-outline-info"
+              (click)="filterByCategory(cat)"
+            >
+              {{ cat.name }}
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -39,9 +39,9 @@ describe('CartComponent', () => {
     component.submitCart();
     expect(spy).toHaveBeenCalled();
   });
-
-  /* it('should increase quantity with 1', () => {
-    component.increaseItemInCart(component.movieIncart);
-    expect(component.movieIncart.quantity).toBe(3);
-  }); */
+  it('should return an empty array', () => {
+    component.cart.length = 2;
+    component.clearCart();
+    expect(component.cart.length).toBe(0);
+  });
 });

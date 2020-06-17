@@ -1,29 +1,4 @@
-<header>
-  <nav class="mt-3">
-    <ul>
-      <li>
-        <a
-          routerLink=""
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          >Home</a
-        >
-      </li>
-      <li>
-        <a routerLink="products" routerLinkActive="active">Movies</a>
-      </li>
-      <li>
-        <a class="title-link" routerLink="">{{ title }}</a>
-      </li>
-      <li>
-        <a routerLink="checkout" routerLinkActive="active">Cart</a>
-      </li>
-      <li>
-        <a routerLink="admin" routerLinkActive="active">Admin</a>
-      </li>
-    </ul>
-  </nav>
-</header>
+<app-header></app-header>
 <main class="my-5">
   <router-outlet></router-outlet>
 </main>

@@ -1,0 +1,23 @@
+nav {
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+    li {
+      a {
+        text-decoration: none;
+        &.active {
+          text-decoration: overline;
+          color: palevioletred;
+        }
+      }
+      p {
+        font-size: 0.8rem;
+        display: inline;
+        vertical-align: top;
+        margin-left: 0.2rem;
+        color: palevioletred;
+      }
+    }
+  }
+}

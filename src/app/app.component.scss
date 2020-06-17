@@ -1,18 +1,6 @@
-nav {
-  ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-evenly;
-    a {
-      text-decoration: none;
-      &.active {
-        text-decoration: overline;
-        color: palevioletred;
-      }
-    }
-  }
-}
 main {
+  display: flex;
+  flex-direction: column;
   flex: 1 0 auto;
 }
 footer {

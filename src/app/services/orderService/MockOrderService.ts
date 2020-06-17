@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import IOrderService from './IOrderService';
 
 export default class MockOrderService implements IOrderService {
-  private orders: Order[] = [
+  orders: Order[] = [
     {
       id: 78,
       companyId: 8585,
@@ -15,18 +15,14 @@ export default class MockOrderService implements IOrderService {
       orderRows: [{ productId: 78, amount: 2 }],
     },
     {
-      id: 79,
+      id: 78,
       companyId: 8585,
-      created: '2020-06-17 13:23:29',
-      createdBy: 'Customer Name',
-      paymentMethod: 'Swish',
-      totalPrice: 600,
-      status: 0,
-      orderRows: [
-        { productId: 89, amount: 1 },
-        { productId: 92, amount: 1 },
-        { productId: 107, amount: 3 },
-      ],
+      created: '2020-06-15 00:05:20',
+      createdBy: 'Customername',
+      paymentMethod: 'Credit card',
+      totalPrice: 200,
+      status: 1,
+      orderRows: [{ productId: 78, amount: 2 }],
     },
     {
       id: 80,
@@ -55,6 +51,7 @@ export default class MockOrderService implements IOrderService {
   orderList: Order[];
   getOrdersFromApi() {
     this.orderListSourse.next(this.orders);
+    this.orderList = this.orders;
   }
 
   postOrder(order) {

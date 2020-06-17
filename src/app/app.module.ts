@@ -14,6 +14,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { OrderPaymentComponent } from './components/order-payment/order-payment.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { OrderPaymentComponent } from './components/order-payment/order-payment.
     CheckoutComponent,
     CustomerComponent,
     OrderPaymentComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

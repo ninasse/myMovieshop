@@ -33,19 +33,9 @@ describe('CustomerComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should send the customer to the parent', () => {
-    const spy = spyOn(component.customerSubmitted, 'emit');
-    component.saveCustomerDeatils();
-    expect(spy).toHaveBeenCalled();
-  });
 
-  it('should set subMittedCustomerInformation to true', () => {
-    component.saveCustomerDeatils();
-    expect(component.submittedCustomerInformation).toBeTrue();
-  });
-
-  it('should send customerSubmitted to parent', () => {
-    const spy = spyOn(component.customerSubmitted, 'emit');
+  it('should send customer to parent', () => {
+    const spy = spyOn(component.customerSubmittedInformation, 'emit');
     component.saveCustomerDeatils();
     expect(spy).toHaveBeenCalled();
   });
