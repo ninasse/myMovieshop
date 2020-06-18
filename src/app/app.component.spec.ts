@@ -17,6 +17,9 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { OrderPaymentComponent } from './components/order-payment/order-payment.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SearchComponent } from './components/search/search.component';
+import { SearchService } from './services/searchService/search.service';
+import { MockSearchService } from './services/searchService/MockSearchService';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -40,6 +43,8 @@ describe('AppComponent', () => {
         OrderPaymentComponent,
         AdminComponent,
         { provide: OrderService, useClass: MockOrderService },
+        SearchComponent,
+        { provide: SearchService, useClass: MockSearchService },
       ],
       declarations: [AppComponent],
     }).compileComponents();

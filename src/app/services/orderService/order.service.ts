@@ -22,7 +22,6 @@ export class OrderService implements IOrderService {
 
   postOrder(order) {
     order = JSON.stringify(order);
-    console.log('hej från Order Service!' + order);
     this.http
       .post(this.orderAPI, order, {
         headers: { 'content-type': 'application/json' },
@@ -61,7 +60,6 @@ export class OrderService implements IOrderService {
       });
       this.orderListSourse.next(ordersFromApi);
       this.orderList = ordersFromApi;
-      console.log(this.orderList);
     });
   }
 
@@ -73,7 +71,6 @@ export class OrderService implements IOrderService {
     this.http
       .delete(this.orderAPI + '/' + order.id)
       .subscribe((deletedOrder: Order) => {
-        console.log(`Delete this order${deletedOrder.id}`);
         this.orderSourse.next(deletedOrder);
       });
   }

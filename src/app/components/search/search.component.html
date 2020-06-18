@@ -1,0 +1,24 @@
+<div id="search-container" class="my-5">
+  <input
+    [formControl]="searchInput"
+    type="text"
+    id="search-input"
+    placeholder="Search movies"
+    (input)="searchMovies(searchInput.value)"
+  />
+
+  <ul class="search-result mt-3">
+    <li *ngFor="let movie of searchResult" class="list-item">
+      <a routerLink="/products/product/{{ movie.Id }}"
+        ><div id="search-result">
+          <img
+            src="{{ movie.ImgUrl }}"
+            alt="{{ movie.Title }}"
+            class="movie-img mx-1"
+          />
+          <p id="list-item-title">{{ movie.Title }}</p>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>

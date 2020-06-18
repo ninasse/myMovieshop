@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
 import Movie, { ProductCategory } from '../../models/Movie';
 import IMovieService from './IMovieService';
 import Category from 'src/app/models/Category';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -56,7 +57,6 @@ export class MovieService implements IMovieService {
 
   getCategoriesFromApi() {
     this.http.get(this.categoriesAPI).subscribe((categoryData: any) => {
-      console.log(categoryData);
       let catsFromAPI: Category[] = categoryData.map((cat) => {
         const category = new Category();
         category.id = cat.id;
@@ -72,14 +72,11 @@ export class MovieService implements IMovieService {
     this.movieList.forEach((movie: Movie) => {
       movie.Category.forEach((element) => {
         if (category.id == element.categoryId) {
-          console.log(element.categoryId);
           this.filteredMovieList.push(movie);
         }
       });
     });
     this.moviesFilteredByGenre.next(this.filteredMovieList);
-    console.log(category.name + 'FRÅN MOVIESERVICE');
-    console.log(this.filteredMovieList);
   }
 
   selectedProductToCart(selectedMovie: Movie) {

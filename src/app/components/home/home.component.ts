@@ -27,16 +27,13 @@ export class HomeComponent implements OnInit {
     this.movieService.moviesFilteredByGenre.subscribe((m: Movie[]) => {
       this.filteredMovies = m;
     });
-    console.log(this.selectedCategory);
     this.movieService.getFilteredByCategory(this.selectedCategory);
   }
   addToCart(selectedMovie: Movie) {
     this.cartService.addItemToCart(selectedMovie);
-    //console.log(`${selectedMovie.Id}HAS BEEN ADDED TO CART`);
   }
   ngOnInit(): void {
     this.movieService.moviesSource.subscribe((m: Movie[]) => {
-      //console.log(m);
       this.movies = m;
     });
     this.movieService.getMoviesFromApi();

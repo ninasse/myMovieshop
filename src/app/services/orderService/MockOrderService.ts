@@ -58,4 +58,7 @@ export default class MockOrderService implements IOrderService {
     this.orderSourse.next(this.order);
     this.orders.push(order);
   }
+  removeOrder(order: Order) {
+    this.orders.splice(0, 1);
+  }
 }

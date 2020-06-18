@@ -22,7 +22,6 @@ export class ProductInformationComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((p) => {
       this.id = p.id;
-      console.log(this.id);
     });
     this.movieService.moviesSource.subscribe((m: Movie[]) => {
       this.selectedMovie = m.find((movie: Movie) => movie.Id == this.id);

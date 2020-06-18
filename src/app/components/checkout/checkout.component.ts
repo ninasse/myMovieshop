@@ -3,6 +3,7 @@ import { OrderService } from 'src/app/services/orderService/order.service';
 import Order from 'src/app/models/Order';
 import Customer from 'src/app/models/Customer';
 import CartItem from 'src/app/models/CartItem';
+import { CartService } from 'src/app/services/cartService/cart.service';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -26,7 +27,6 @@ export class CheckoutComponent implements OnInit {
     });
     this.orderSubmitted = true;
     this.orderService.postOrder(order);
-    console.log(order);
     this.cart = [];
     localStorage.setItem('Cartitems', JSON.stringify(this.cart));
   }

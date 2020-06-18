@@ -1,3 +1,4 @@
+<div class="container text-center my-5"><app-search></app-search></div>
 <div *ngIf="filteredMovies.length == 0; else showFilteredMovieList">
   <div class="container">
     <h2 class="text-center my-5">Hey there!</h2>
@@ -6,10 +7,16 @@
       <p>Choose the genre you're in the mood for!</p>
       <div class="cats-buttons my-5">
         <div *ngFor="let cat of categories">
-          <div class="category-button">
-            <button class="btn" (click)="filterByCategory(cat)">
-              {{ cat.name }}
-            </button>
+          <div *ngIf="cat.name !== null">
+            <div class="category-button">
+              <button
+                class="btn"
+                (click)="filterByCategory(cat)"
+                id="{{ cat.name }}"
+              >
+                {{ cat.name }}
+              </button>
+            </div>
           </div>
         </div>
       </div>

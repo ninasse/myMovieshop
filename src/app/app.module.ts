@@ -15,6 +15,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { OrderPaymentComponent } from './components/order-payment/order-payment.component';
 import { HeaderComponent } from './components/header/header.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HeaderComponent } from './components/header/header.component';
     CustomerComponent,
     OrderPaymentComponent,
     HeaderComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

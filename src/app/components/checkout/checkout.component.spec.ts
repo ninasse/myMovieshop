@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CheckoutComponent } from './checkout.component';
 import { OrderService } from 'src/app/services/orderService/order.service';
 import MockOrderService from 'src/app/services/orderService/MockOrderService';
+import { CartService } from 'src/app/services/cartService/cart.service';
+import MockCartService from 'src/app/services/cartService/MockCartService';
 
 describe('CheckoutComponent', () => {
   let component: CheckoutComponent;
@@ -26,5 +28,12 @@ describe('CheckoutComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should save the order', () => {
+    spyOn(component, 'submitCart');
+    component.ngOnInit();
+    expect(component.submitCart).toHaveBeenCalled();
+    expect(component.cartSubmitted).toBeFalse();
   });
 });

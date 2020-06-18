@@ -16,4 +16,8 @@ export class AppPage {
   theAllMoviesButton() {
     return element(by.id('all-movies-button'));
   }
+
+  getTheSearchInput() {
+    return element(by.id('search-input'));
+  }
 }

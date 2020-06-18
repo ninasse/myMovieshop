@@ -87,6 +87,8 @@ export class CartService implements ICartService {
 
   clearCart() {
     this.cartItems = [];
+    localStorage.setItem('Cartitems', JSON.stringify(this.cartItems));
+    this.showNumberOfItemsInCart(this.numberOfItemsInCart);
     return this.cartItems;
   }
 }

@@ -1,10 +1,10 @@
 <div class="movie-container my-4">
   <h4 class="text-center movie-title">{{ movie.Title }}</h4>
-  <div>
+  <div class="img-holder">
     <img src="{{ movie.ImgUrl }}" alt="{{ movie.Title }}" class="movie-img" />
   </div>
   <div class="movie-descr">{{ movie.Descr }}</div>
-  <p>Release year: {{ movie.ReleaseYear }}</p>
+  <p class="release-year">Release year: {{ movie.ReleaseYear }}</p>
   <p>
     <b class="price-tag">{{ movie.Price }} SEK</b>
   </p>
